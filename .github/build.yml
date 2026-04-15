@@ -1,5 +1,6 @@
 name: Build ImmortalWrt 23.05 MT7628 4G
 
+# 👇 这里是正确的触发配置，绝对不能缩进、不能写错
 on:
   workflow_dispatch:
 
@@ -27,10 +28,6 @@ jobs:
       - name: 写入自定义配置 (.config)
         run: |
           cat > .config <<'EOF'
-          # ==========================================
-          # MT7628 4G - ALFA AWUSFREE1 专用配置
-          # ==========================================
-          
           CONFIG_TARGET_ramips=y
           CONFIG_TARGET_ramips_mt7628=y
           CONFIG_TARGET_ramips_mt7628_DEVICE_alfa_network_awusfree1=y
@@ -124,14 +121,11 @@ jobs:
           CONFIG_PACKAGE_kmod-fs-vfat=n
           EOF
 
-      # ==========================================
-      # 重点：加入开机自动4G拨号（不填APN也能用）
-      # ==========================================
+      # 开机自动4G拨号
       - name: 添加自动4G拨号脚本
         run: |
           mkdir -p files/etc/uci-defaults/
           cat > files/etc/uci-defaults/99-auto-4g <<'EOF'
-          # 自动创建4G接口，空APN兼容移动/联通/物联网卡
           uci set network.4g=interface
           uci set network.4g.proto='qmi'
           uci set network.4g.device='/dev/cdc-wdm0'
@@ -139,13 +133,11 @@ jobs:
           uci set network.4g.pincode=''
           uci set network.4g.auth='none'
           
-          # 绑定到WAN防火墙
           uci set firewall.@zone[1].network='wan wan6 4g'
           
           uci commit network
           uci commit firewall
           
-          # 重启网络生效
           /etc/init.d/network restart
           EOF
           chmod 755 files/etc/uci-defaults/99-auto-4g
