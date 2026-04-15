@@ -12,12 +12,17 @@ jobs:
           sudo apt update
           sudo apt install -y build-essential libncurses5-dev git python3 unzip wget gawk flex bison libssl-dev zlib1g-dev libelf-dev
 
+      # 关键修复：升级到 v6 版本，并关闭兼容模式
       - name: 拉取 ImmortalWrt 源码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: immortalwrt/immortalwrt
           ref: openwrt-23.05
           fetch-depth: 1
+          persist-credentials: false  # 禁用令牌写入，避免生成不兼容的 Git 配置
+
+      - name: 修复 Git 安全目录 (关键步骤)
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: 更新 feeds
         run: |
