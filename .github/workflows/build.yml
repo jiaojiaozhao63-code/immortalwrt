@@ -21,26 +21,26 @@ jobs:
       - name: 写入配置
         run: |
           cat > .config <<'EOF'
-CONFIG_TARGET_ramips=y
-CONFIG_TARGET_ramips_mt76x8=y
-CONFIG_TARGET_ramips_mt76x8_DEVICE_alfa_network_awusfree1=y
-CONFIG_SMALL_FLASH=y
-CONFIG_PACKAGE_dnsmasq=y
-CONFIG_PACKAGE_dropbear=y
-CONFIG_PACKAGE_uhttpd=y
-CONFIG_PACKAGE_firewall=y
-CONFIG_PACKAGE_luci=y
-CONFIG_PACKAGE_luci-theme-bootstrap=y
-CONFIG_PACKAGE_luci-i18n-base-zh-cn=y
-CONFIG_PACKAGE_kmod-mt76x8=y
-CONFIG_PACKAGE_kmod-usb-core=y
-CONFIG_PACKAGE_kmod-usb2=y
-CONFIG_PACKAGE_kmod-usb-serial=y
-CONFIG_PACKAGE_kmod-usb-serial-option=y
-CONFIG_PACKAGE_kmod-usb-net-qmi-wwan=y
-CONFIG_PACKAGE_uqmi=y
-CONFIG_IPV6=n
-EOF
+          CONFIG_TARGET_ramips=y
+          CONFIG_TARGET_ramips_mt76x8=y
+          CONFIG_TARGET_ramips_mt76x8_DEVICE_alfa_network_awusfree1=y
+          CONFIG_SMALL_FLASH=y
+          CONFIG_PACKAGE_dnsmasq=y
+          CONFIG_PACKAGE_dropbear=y
+          CONFIG_PACKAGE_uhttpd=y
+          CONFIG_PACKAGE_firewall=y
+          CONFIG_PACKAGE_luci=y
+          CONFIG_PACKAGE_luci-theme-bootstrap=y
+          CONFIG_PACKAGE_luci-i18n-base-zh-cn=y
+          CONFIG_PACKAGE_kmod-mt76x8=y
+          CONFIG_PACKAGE_kmod-usb-core=y
+          CONFIG_PACKAGE_kmod-usb2=y
+          CONFIG_PACKAGE_kmod-usb-serial=y
+          CONFIG_PACKAGE_kmod-usb-serial-option=y
+          CONFIG_PACKAGE_kmod-usb-net-qmi_wwan=y
+          CONFIG_PACKAGE_uqmi=y
+          CONFIG_IPV6=n
+          EOF
 
       - name: 安装 feeds
         run: |
